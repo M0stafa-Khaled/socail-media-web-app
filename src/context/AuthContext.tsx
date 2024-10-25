@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       } else if (currentAccount && "$id" in currentAccount) {
         setUser({
           id: currentAccount.$id,
-          name: currentAccount.user?.name,
+          name: currentAccount.name,
           username: currentAccount.username,
           email: currentAccount.email,
           imageUrl: currentAccount.imageUrl,
