@@ -5,6 +5,17 @@ import { useLogOutAccount } from "@/lib/react-query/queriesAndMutations";
 import { useEffect } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const LeftSideBar = () => {
   const { user } = useUserContext();
@@ -67,14 +78,35 @@ const LeftSideBar = () => {
           })}
         </ul>
       </nav>
-      <Button
-        variant={"ghost"}
-        className="shad-button_ghost"
-        onClick={() => logOutHandler()}
-      >
-        <img src="/assets/icons/logout.svg" alt="logout" />
-        <span className="small-medium lg:base-medium">Logout</span>
-      </Button>
+
+      <AlertDialog>
+        <AlertDialogTrigger asChild>
+          <Button variant={"ghost"} className="shad-button_ghost">
+            <img src="/assets/icons/logout.svg" alt="logout" />
+            <span className="small-medium lg:base-medium">Logout</span>
+          </Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure to logout?</AlertDialogTitle>
+            <AlertDialogDescription>
+              When you log out, you will not be able to access your account
+              information until after you log in again
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              className="bg-red"
+              onClick={() => {
+                logOutHandler();
+              }}
+            >
+              LogOut
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </aside>
   );
 };

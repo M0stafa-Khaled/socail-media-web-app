@@ -60,13 +60,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         return true;
       } else {
         // Handle case where currentAccount is null or undefined
-        console.warn("No valid currentAccount found");
         return false;
       }
 
       return false;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      console.error(error);
       return false;
     } finally {
       setIsLoading(false);
@@ -84,7 +83,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     checkAuthUser();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const value = {

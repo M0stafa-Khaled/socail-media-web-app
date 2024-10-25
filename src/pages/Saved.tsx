@@ -4,7 +4,6 @@ import { useGetCurrentUser } from "@/lib/react-query/queriesAndMutations";
 import { Models } from "appwrite";
 const Saved = () => {
   const { data: currentUser } = useGetCurrentUser();
-  console.log(currentUser);
   const savePosts =
     currentUser && "save" in currentUser
       ? currentUser.save

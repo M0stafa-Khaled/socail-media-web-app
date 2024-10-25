@@ -13,8 +13,6 @@ const PostCard = ({ post }: IProps) => {
 
   if (!post.creator) return;
 
-  console.log(post.tags);
-
   return (
     <div className="post-card">
       <div className="flex-between">

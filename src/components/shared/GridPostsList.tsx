@@ -14,7 +14,6 @@ const GridPostsList = ({
   showUser = true,
   showStats = true,
 }: IProps) => {
-  console.log(posts);
   const { user } = useUserContext();
   return (
     <ul className="grid-container">

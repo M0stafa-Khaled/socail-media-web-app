@@ -44,7 +44,6 @@ const SinUp = () => {
   });
   const onSubmit = async (user: z.infer<typeof signUpValidation>) => {
     const newUser = await createUserAccount(user);
-    console.log(newUser.error.response.message);
     if (!newUser)
       return toast({
         title: "Email or password has been taken",
@@ -58,7 +57,6 @@ const SinUp = () => {
       password: user.password,
     });
 
-    console.log({ session });
     if (!session) {
       return toast({
         title: "Sign up field",

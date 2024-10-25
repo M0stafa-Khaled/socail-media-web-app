@@ -39,7 +39,9 @@ const PostStatus = ({ post, userId }: IProps) => {
   const { data: currentUser } = useGetCurrentUser();
 
   const savedPostRecord = (currentUser as Models.Document)?.save.find(
-    (record: Models.Document) => record.post.$id === post.$id
+    (record: Models.Document) => {
+      return record.$id === post.$id;
+    }
   );
 
   useEffect(() => {
@@ -60,7 +62,6 @@ const PostStatus = ({ post, userId }: IProps) => {
 
   const handleSavePost = (e: MouseEvent) => {
     e.stopPropagation();
-    console.log("save Post Fun");
     if (savedPostRecord) {
       setIsSaved(false);
       deleteSavedPost(savedPostRecord.$id);

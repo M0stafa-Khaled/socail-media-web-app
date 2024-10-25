@@ -76,7 +76,6 @@ const PostForm = ({ post, action }: IProps) => {
       ...data,
       userId: id as string,
     });
-    console.log(newPost);
 
     if (!newPost) {
       toast({
