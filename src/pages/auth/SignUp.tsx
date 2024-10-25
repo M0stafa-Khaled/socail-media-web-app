@@ -46,7 +46,7 @@ const SinUp = () => {
     const newUser = await createUserAccount(user);
     if (!newUser)
       return toast({
-        title: "Email or password has been taken",
+        title: "Email or username has been taken",
         duration: 3000,
         variant: "destructive",
         className: "bg-dark-3 border-red text-red",
@@ -72,7 +72,7 @@ const SinUp = () => {
       navigate("/");
     } else {
       return toast({
-        title: "Email or password has been taken",
+        title: "Email or username has been taken",
         duration: 3000,
         variant: "destructive",
         className: "bg-dark-3 border-red text-red",
