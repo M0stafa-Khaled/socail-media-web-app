@@ -38,11 +38,12 @@ const PostStatus = ({ post, userId }: IProps) => {
   // Get current user from server
   const { data: currentUser } = useGetCurrentUser();
 
-  const savedPostRecord = (currentUser as Models.Document)?.save.find(
-    (record: Models.Document) => {
-      return record.$id === post.$id;
-    }
-  );
+  let savedPostRecord: Models.Document | undefined;
+  if (currentUser && post && "save" in currentUser) {
+    savedPostRecord = currentUser?.save.find(
+      (record: Models.Document) => record?.post?.$id === post?.$id
+    );
+  }
 
   useEffect(() => {
     setIsSaved(!!savedPostRecord);
@@ -66,23 +67,22 @@ const PostStatus = ({ post, userId }: IProps) => {
       setIsSaved(false);
       deleteSavedPost(savedPostRecord.$id);
       if (isDeletingSuccessfully)
-        toast({
+        return toast({
           title: "Post unsaved successfully",
           duration: 3000,
           variant: "destructive",
           className: "bg-dark-3 border-green-800 text-green-700",
         });
-    } else {
-      savePost({ postId: post.$id, userId: userId });
-      setIsSaved(true);
-      if (isSavedSuccessfully)
-        toast({
-          title: "Post saved successfully",
-          duration: 3000,
-          variant: "destructive",
-          className: "bg-dark-3 border-green-800 text-green-700",
-        });
     }
+    savePost({ userId: userId, postId: post.$id });
+    setIsSaved(true);
+    if (isSavedSuccessfully)
+      return toast({
+        title: "Post saved successfully",
+        duration: 3000,
+        variant: "destructive",
+        className: "bg-dark-3 border-green-800 text-green-700",
+      });
   };
 
   return (

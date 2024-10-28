@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { INewPost, INewUser, IUpdatePost, IUpdateUser } from "@/interfaces";
 import { account, appwriteConfig, avatars, databases, storage } from "./config";
-import { ID, ImageGravity, Models, Query } from "appwrite";
+import { ID, Models, Query } from "appwrite";
 
 // ** ========== Create Account ========== **
 export const createUserAccount = async (user: INewUser) => {
@@ -257,15 +257,7 @@ export const uploadFile = async (file: File) => {
 // ** ========== Get File Preview ========== **
 export const getFilePreview = (fileId: string) => {
   try {
-    const fileUrl = storage.getFilePreview(
-      appwriteConfig.storageId,
-      fileId,
-      2000,
-      2000,
-      ImageGravity.Top,
-      100
-    );
-
+    const fileUrl = storage.getFilePreview(appwriteConfig.storageId, fileId);
     if (!fileUrl) throw new Error();
 
     return fileUrl;
